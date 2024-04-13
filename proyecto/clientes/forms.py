@@ -1,5 +1,5 @@
 from django import forms
-from .models import Cliente
+from .models import Cliente, InformacionAdicional
 
 class ClienteForm(forms.ModelForm):
     terminosYCondiciones = forms.BooleanField(label='Acepto los términos y condiciones', required=True)
@@ -43,3 +43,24 @@ class ClienteForm(forms.ModelForm):
             self.add_error('terminosYCondiciones', 'Debes aceptar los términos y condiciones para continuar.')
         
         return cleaned_data
+    
+class InformacionAdicionalForm(forms.ModelForm):
+    class Meta:
+        model = InformacionAdicional
+        fields = [
+            'profesion', 
+            'actEconomica', 
+            'empresa',
+            'ingresos', 
+            'egresos', 
+            'deuda']
+        labels = {
+            'profesion' : 'Profesion',
+            'actEconomica' : 'ActEconomica',
+            'empresa' : 'Empresa',
+            'ingresos' : 'Ingresos',
+            'egresos' : 'Egresos',
+            'deuda' : 'Deuda',
+         
+        }
+    

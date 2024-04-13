@@ -6,3 +6,6 @@ def index(request):
 def terminosycondiciones(request):
     return render(request, 'terminosYCondiciones.html')
 
+def intento(request):
+    return render(request, 'intento.html')
+
