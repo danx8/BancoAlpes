@@ -16,17 +16,11 @@ Including another URLconf
 from django.urls import include
 from django.contrib import admin
 from django.urls import path
+from django.views.decorators.csrf import csrf_exempt
 from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.index),
-    path('terminosCondiciones', views.terminosycondiciones),
-    path('', include('cliente.urls')),
-    
-   
- 
-   
+    path('clientes/', views.clientes_list),
+    path('clientesCreate/', csrf_exempt(views.cliente_create), name='clientesCreate'),
 ]
-
 
