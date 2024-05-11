@@ -51,12 +51,11 @@
                                 <td>{{ cliente.validar_integridad }}</td>
                                 <td>
                                     {% if cliente.validar_integridad %}
-                                        <div class="integridad-indicador" style="background-color: blue;"></div>
+                                    <span class="indicator-green"></span>
                                     {% else %}
-                                        <div class="integridad-indicador" style="background-color: red;"></div>
+                                    <span class="indicator-red"></span>
                                     {% endif %}
                                 </td>
-                            
                                 <td>
                                     <a class="btn btn-primary" href="/adicionalcreate">
                                         Completar Información Adicional
