@@ -21,6 +21,11 @@ class Cliente(models.Model):
     def __str__(self):
         return '{}'.format(self.cedula)
     
+    def validar_integridad(self):
+        data = f"{self.nombre}{self.apellido}{self.cedula}{self.celular}{self.correo}{self.pais}{self.ciudad}{self.fechaNacimiento}".encode('utf-8')
+        current_hash = hashlib.sha256(data).hexdigest()
+        return current_hash == self.integridad_hash
+    
 class InformacionAdicional(models.Model):
     cliente = models.OneToOneField(Cliente, on_delete=models.CASCADE)
     profesion = models.CharField(max_length=100)
