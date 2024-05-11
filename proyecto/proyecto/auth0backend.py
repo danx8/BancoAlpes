@@ -13,11 +13,11 @@ class Auth0(BaseOAuth2):
     def authorization_url(self):
         """Return the authorization endpoint.""" 
         return "https://" + self.setting('DOMAIN') + "/authorize" 
-    
+
     def access_token_url(self): 
         """Return the token endpoint."""
         return "https://" + self.setting('DOMAIN') + "/oauth/token" 
-    
+
     def get_user_id(self, details, response): 
         """Return current user id.""" 
         return details['user_id'] 
@@ -35,14 +35,14 @@ class Auth0(BaseOAuth2):
         
     # Esta función está POR FUERA de la clase Auth0. Es una función independiente.
 
-    def getRole(request):
+def getRole(request):
 
-        user = request.user 
-        auth0user = user.social_auth.filter(provider="auth0")[0]
-        accessToken = auth0user.extra_data['access_token']
-        url = "https://dev-7kijsxsv483uz7nf.us.auth0.com/userinfo"
-        headers = {'authorization': 'Bearer ' + accessToken}
-        resp = requests.get(url, headers=headers)
-        userinfo = resp.json()
-        role = userinfo['dev-7kijsxsv483uz7nf.us.auth0.com/role']
-        return (role)
+    user = request.user 
+    auth0user = user.social_auth.filter(provider="auth0")[0]
+    accessToken = auth0user.extra_data['access_token']
+    url = "https://dev-7kijsxsv483uz7nf.us.auth0.com/userinfo"
+    headers = {'authorization': 'Bearer ' + accessToken}
+    resp = requests.get(url, headers=headers)
+    userinfo = resp.json()
+    role = userinfo['dev-7kijsxsv483uz7nf.us.auth0.com/role']
+    return (role)
