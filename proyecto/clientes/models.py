@@ -14,7 +14,7 @@ class Cliente(models.Model):
     
     
     def save(self, *args, **kwargs):
-            data = f"{self.nombre}{self.apellido}{self.cedula}{self.celular}{self.correo}{self.pais}{self.ciudad}{self.fecha_nacimiento}".encode('utf-8')
+            data = f"{self.nombre}{self.apellido}{self.cedula}{self.celular}{self.correo}{self.pais}{self.ciudad}{self.fechaNacimiento}".encode('utf-8')
             self.integridad_hash = hashlib.sha256(data).hexdigest()
             super().save(*args, **kwargs)  
 
