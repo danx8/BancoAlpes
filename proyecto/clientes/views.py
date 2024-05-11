@@ -5,15 +5,34 @@ from django.urls import reverse
 from .forms import ClienteForm, InformacionAdicionalForm
 from .models import Cliente, InformacionAdicional
 from .logic.cliente_logic import get_cliente, create_cliente
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from django.contrib import messages
+from django.http import HttpResponseRedirect, HttpResponse
+from django.urls import reverse
+from proyecto.auth0backend import getRole
 
+@login_required
 def cliente_list(request):
+    role = getRole(request)
+    if role != "Administrador":
+         return HttpResponse("Unauthorized User")
+     
     clientes = get_cliente()
     context = {
-        'cliente_list': clientes
+            'cliente_list': clientes
     }
     return render(request, 'Cliente/clientes.html', context)
 
+
+@login_required
 def cliente_create(request):
+    role = getRole(request)
+    if role != "Administrador":
+         return HttpResponse("Unauthorized User")
+
+    
+    
     if request.method == 'POST':
         form = ClienteForm(request.POST)
         if form.is_valid():
