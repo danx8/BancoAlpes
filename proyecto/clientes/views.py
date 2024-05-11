@@ -29,7 +29,7 @@ def cliente_list(request):
 def cliente_create(request):
     role = getRole(request)
     if role != "Administrador":
-         return HttpResponseRedirect(reverse('failed'))
+         return HttpResponseRedirect(reverse('clienteCreateFailed'))
     
     if request.method == 'POST':
         form = ClienteForm(request.POST)
