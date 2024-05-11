@@ -16,8 +16,8 @@ from proyecto.auth0backend import getRole
 def cliente_list(request):
     role = getRole(request)
     if role != "Administrador":
-         return HttpResponse("Unauthorized User")
-     
+         return HttpResponse("No autorizado a listar clientes")
+          
     clientes = get_cliente()
     context = {
             'cliente_list': clientes
@@ -29,9 +29,7 @@ def cliente_list(request):
 def cliente_create(request):
     role = getRole(request)
     if role != "Administrador" and role != "Normal" :
-         return HttpResponse("Unauthorized User")
-
-    
+         return HttpResponse("No autorizado a crear clientes")
     
     if request.method == 'POST':
         form = ClienteForm(request.POST)
@@ -48,6 +46,30 @@ def cliente_create(request):
         'form': form,
     }
     return render(request, 'Cliente/clienteCreate.html', context)
+
+
+def cliente_create_jmeter(request):
+    
+    if request.method == 'POST':
+        form = ClienteForm(request.POST)
+        if form.is_valid():
+            create_cliente(form)
+            messages.add_message(request, messages.SUCCESS, 'Successfully created cliente')
+            return HttpResponseRedirect(reverse('clienteCreate'))
+        else:
+            print(form.errors)
+    else:
+        form = ClienteForm()
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'Cliente/clienteCreate.html', context)
+
+
+
+
+
 
 @login_required
 def informacion_adicional_create(request, cliente_id):
