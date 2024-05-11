@@ -33,9 +33,9 @@
                             <th>País</th>
                             <th>Ciudad</th>
                             <th>Fecha de nacimiento</th>
-                            <th>Hash</th>
+                            <th>Hash modificado</th>
                             <th>Acciones</th>
-                            <th>Indicador</th> <!-- Agregamos la columna para el indicador -->
+                            
                         </tr>
                         </thead>
                         <tbody>
@@ -49,15 +49,6 @@
                                 <td>{{ cliente.pais }}</td>
                                 <td>{{ cliente.ciudad }}</td>
                                 <td>{{ cliente.fechaNacimiento }}</td>
-                                <td>{{ cliente.validar_integridad }}</td>
-                                
-                                <td>
-                                    <a class="btn btn-primary" href="/adicionalcreate">
-                                        Completar Información Adicional
-                                    </a>
-                                </td>
-                                
-                                <!-- Indicador gráfico -->
                                 <td>
                                     {% if cliente.validar_integridad %}
                                     <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background-color: green;"></span>
@@ -65,7 +56,11 @@
                                     <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background-color: red;"></span>
                                     {% endif %}
                                 </td>
-                                
+                                <td>
+                                    <a class="btn btn-primary" href="/adicionalcreate">
+                                        Completar Información Adicional
+                                    </a>
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>
