@@ -1,3 +1,4 @@
+import hashlib
 from django.db import models
 
 class Cliente(models.Model):
@@ -9,7 +10,12 @@ class Cliente(models.Model):
     pais = models.CharField(max_length=100, default='')
     ciudad = models.CharField(max_length=100, default='')
     fechaNacimiento = models.DateField()
-   
+    integridad_hash = models.CharField(max_length=64, editable=False)
+    
+    def save(self, *args, **kwargs):
+            data = f"{self.nombre}{self.apellido}{self.cedula}{self.celular}{self.correo}{self.pais}{self.ciudad}{self.fecha_nacimiento}".encode('utf-8')
+            self.integridad_hash = hashlib.sha256(data).hexdigest()
+            super().save(*args, **kwargs)  
 
     def __str__(self):
         return '{}'.format(self.cedula)
