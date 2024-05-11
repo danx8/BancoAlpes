@@ -25,7 +25,11 @@ urlpatterns = [
     path('healthcheck/', views.healthcheck),
     path('', include('clientes.urls')),
     path('', include('adicionales.urls')),
+    path(r'', include('django.contrib.auth.urls')),
+    path(r'', include('social_django.urls')),
    
 ]
+
+
 
 
