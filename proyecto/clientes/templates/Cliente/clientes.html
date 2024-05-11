@@ -33,6 +33,7 @@
                             <th>País</th>
                             <th>Ciudad</th>
                             <th>Fecha de nacimiento</th>
+                            <th>Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -47,19 +48,14 @@
                                 <td>{{ cliente.ciudad }}</td>
                                 <td>{{ cliente.fechaNacimiento }}</td>
                                 <td>
-                                    
-                                    <a  class="btn btn-primary" href="/adicionalcreate">
+                                    <a class="btn btn-primary" href="/adicionalcreate">
                                         Completar Información Adicional
                                     </a>
+                                    <button class="btn btn-danger" onmouseover="this.style.backgroundColor='red'" onmouseout="this.style.backgroundColor=''" >Juan</button>
                                 </td>
                             </tr>
                             {% endfor %}
-    
-                            </tbody>
-                        
-                            
-    
-                           
+                        </tbody>
                     </table>
 
                     <div style="text-align:center;">
@@ -75,5 +71,3 @@
     </div>
 </div>
 {% endblock %}
-
-
