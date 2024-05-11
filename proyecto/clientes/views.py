@@ -28,7 +28,7 @@ def cliente_list(request):
 @login_required
 def cliente_create(request):
     role = getRole(request)
-    if role != "Administrador":
+    if role != "Administrador" and role != "Normal" :
          return HttpResponse("Unauthorized User")
 
     
@@ -49,7 +49,13 @@ def cliente_create(request):
     }
     return render(request, 'Cliente/clienteCreate.html', context)
 
+@login_required
 def informacion_adicional_create(request, cliente_id):
+    role = getRole(request)
+    if role != "Administrador":
+        return HttpResponse("Unauthorized User")
+    
+    
     cliente = Cliente.objects.get(pk=cliente_id)
     if request.method == 'POST':
         form = InformacionAdicionalForm(request.POST)
