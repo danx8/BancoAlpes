@@ -15,7 +15,7 @@ from proyecto.auth0backend import getRole
 @login_required
 def cliente_list(request):
     role = getRole(request)
-    if role != "Administrador":
+    if role != "Administrador" and role != "Normal":
          return HttpResponse("No autorizado a listar clientes")
           
     clientes = get_cliente()
@@ -28,7 +28,7 @@ def cliente_list(request):
 @login_required
 def cliente_create(request):
     role = getRole(request)
-    if role != "Administrador" and role != "Normal" :
+    if role != "Administrador":
          return HttpResponse("No autorizado a crear clientes")
     
     if request.method == 'POST':
