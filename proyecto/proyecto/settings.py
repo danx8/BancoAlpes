@@ -92,6 +92,7 @@ DATABASES = {
         'PASSWORD': 'isis2503',
         'HOST': '10.128.0.12',   
         'PORT': '5432',
+        'MAX_CONNS': 20
     }
 }
 
