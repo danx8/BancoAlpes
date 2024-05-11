@@ -50,13 +50,11 @@
                                 <td>{{ cliente.fechaNacimiento }}</td>
                                 <td>{{ cliente.validar_integridad }}</td>
                                 <td>
-                                    <div id="integridad_{{ cliente.id }}" class="integridad-indicador" 
-                                         {% if cliente.validar_integridad %}
-                                             style="background-color: blue"
-                                         {% else %}
-                                             style="background-color: black"
-                                         {% endif %}>
-                                    </div>
+                                    {% if cliente.validar_integridad %}
+                                        <div class="integridad-indicador" style="background-color: blue;"></div>
+                                    {% else %}
+                                        <div class="integridad-indicador" style="background-color: red;"></div>
+                                    {% endif %}
                                 </td>
                             
                                 <td>
