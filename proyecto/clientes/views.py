@@ -17,6 +17,7 @@ def cliente_list(request):
     role = getRole(request)
     if role != "Administrador" and role != "Normal":
          return HttpResponse("No autorizado a listar clientes")
+     
           
     clientes = get_cliente()
     context = {
@@ -29,7 +30,8 @@ def cliente_list(request):
 def cliente_create(request):
     role = getRole(request)
     if role != "Administrador":
-         return HttpResponseRedirect(reverse('clienteCreateFailed'))
+        
+        return render(request, 'Cliente/clienteCreateFailed.html', context)
     
     if request.method == 'POST':
         form = ClienteForm(request.POST)
