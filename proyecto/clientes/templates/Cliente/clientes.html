@@ -33,6 +33,7 @@
                             <th>País</th>
                             <th>Ciudad</th>
                             <th>Fecha de nacimiento</th>
+                            <th>Hash</th>
                             <th>Acciones</th>
                         </tr>
                         </thead>
@@ -47,15 +48,12 @@
                                 <td>{{ cliente.pais }}</td>
                                 <td>{{ cliente.ciudad }}</td>
                                 <td>{{ cliente.fechaNacimiento }}</td>
+                                <td>{{ cliente.validar_integridad }}</td>
                                 <td>
                                     <a class="btn btn-primary" href="/adicionalcreate">
                                         Completar Información Adicional
                                     </a>
-                                    {% if cliente.juan %}
-                                    <button class="btn btn-success" style="background-color:blue" onmouseover="this.style.backgroundColor='red'" onmouseout="this.style.backgroundColor='blue'" >Juan</button>
-                                    {% else %}
-                                    <button class="btn btn-success" style="background-color:red" onmouseover="this.style.backgroundColor='blue'" onmouseout="this.style.backgroundColor='red'" >Juan</button>
-                                    {% endif %}
+                                    
                                 </td>
                             </tr>
                             {% endfor %}
