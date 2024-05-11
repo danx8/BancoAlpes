@@ -49,11 +49,14 @@
                                 <td>{{ cliente.ciudad }}</td>
                                 <td>{{ cliente.fechaNacimiento }}</td>
                                 <td>{{ cliente.validar_integridad }}</td>
-                                {% if cliente.validar_integridad %}
-                                <button class="btn btn-success" style="background-color:blue" onmouseover="this.style.backgroundColor='red'" onmouseout="this.style.backgroundColor='blue'" >validar_integridad</button>
-                                {% else %}
-                                <button class="btn btn-success" style="background-color:red" onmouseover="this.style.backgroundColor='blue'" onmouseout="this.style.backgroundColor='red'" >validar_integridad</button>
-                                {% endif %}
+                                <td>
+                                    {% if cliente.validar_integridad %}
+                                        <button class="btn btn-success" style="background-color:blue" onmouseover="this.style.backgroundColor='red'" onmouseout="this.style.backgroundColor='blue'" >Integridad: Yes</button>
+                                    {% else %}
+                                        <button class="btn btn-success" style="background-color:black" onmouseover="this.style.backgroundColor='red'" onmouseout="this.style.backgroundColor='black'" onmouseleave="this.style.backgroundColor='green'">Integridad: Not</button>
+                                    {% endif %}
+                                </td>
+                            
                                 <td>
                                     <a class="btn btn-primary" href="/adicionalcreate">
                                         Completar Información Adicional
