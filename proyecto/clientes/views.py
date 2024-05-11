@@ -31,7 +31,7 @@ def cliente_create(request):
     role = getRole(request)
     if role != "Administrador":
         
-        return render(request, 'Cliente/clienteCreateFailed.html', context)
+        return render(request, 'clienteCreateFailed.html', context)
     
     if request.method == 'POST':
         form = ClienteForm(request.POST)
