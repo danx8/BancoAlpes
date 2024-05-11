@@ -51,7 +51,11 @@
                                     <a class="btn btn-primary" href="/adicionalcreate">
                                         Completar Información Adicional
                                     </a>
-                                    <button class="btn btn-success" onmouseover="this.style.backgroundColor='red'" onmouseout="this.style.backgroundColor='green'" >Juan</button>
+                                    {% if cliente.juan %}
+                                    <button class="btn btn-success" style="background-color:blue" onmouseover="this.style.backgroundColor='red'" onmouseout="this.style.backgroundColor='blue'" >Juan</button>
+                                    {% else %}
+                                    <button class="btn btn-success" style="background-color:red" onmouseover="this.style.backgroundColor='blue'" onmouseout="this.style.backgroundColor='red'" >Juan</button>
+                                    {% endif %}
                                 </td>
                             </tr>
                             {% endfor %}

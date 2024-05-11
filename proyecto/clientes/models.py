@@ -10,22 +10,24 @@ class Cliente(models.Model):
     pais = models.CharField(max_length=100, default='')
     ciudad = models.CharField(max_length=100, default='')
     fechaNacimiento = models.DateField()
+    juan = models.BooleanField(default=False)
     integridad_hash = models.CharField(max_length=64, editable=False)
     
+    def calcular_hash(self):
+        data = f"{self.nombre}{self.apellido}{self.cedula}{self.celular}{self.correo}{self.pais}{self.ciudad}{self.fechaNacimiento}".encode('utf-8')
+        return hashlib.sha256(data).hexdigest()
     
     def save(self, *args, **kwargs):
-            data = f"{self.nombre}{self.apellido}{self.cedula}{self.celular}{self.correo}{self.pais}{self.ciudad}{self.fechaNacimiento}".encode('utf-8')
-            self.integridad_hash = hashlib.sha256(data).hexdigest()
-            super().save(*args, **kwargs)  
+        self.integridad_hash = self.calcular_hash()
+        super().save(*args, **kwargs)  
 
     def __str__(self):
-        return '{}'.format(self.cedula)
+        return f'{self.nombre} {self.apellido} - {self.cedula}'
     
+    @property
     def validar_integridad(self):
-        data = f"{self.nombre}{self.apellido}{self.cedula}{self.celular}{self.correo}{self.pais}{self.ciudad}{self.fechaNacimiento}".encode('utf-8')
-        current_hash = hashlib.sha256(data).hexdigest()
-        return current_hash == self.integridad_hash
-    
+        return self.integridad_hash == self.calcular_hash()
+
 class InformacionAdicional(models.Model):
     cliente = models.OneToOneField(Cliente, on_delete=models.CASCADE)
     profesion = models.CharField(max_length=100)
@@ -37,6 +39,3 @@ class InformacionAdicional(models.Model):
 
     def __str__(self):
         return f"Información adicional de {self.cliente.nombre} {self.cliente.apellido}"
-    
-
-
