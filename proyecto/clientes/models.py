@@ -12,6 +12,7 @@ class Cliente(models.Model):
     fechaNacimiento = models.DateField()
     integridad_hash = models.CharField(max_length=64, editable=False)
     
+    
     def save(self, *args, **kwargs):
             data = f"{self.nombre}{self.apellido}{self.cedula}{self.celular}{self.correo}{self.pais}{self.ciudad}{self.fecha_nacimiento}".encode('utf-8')
             self.integridad_hash = hashlib.sha256(data).hexdigest()
