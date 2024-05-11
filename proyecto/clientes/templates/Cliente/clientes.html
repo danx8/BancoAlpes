@@ -50,11 +50,13 @@
                                 <td>{{ cliente.fechaNacimiento }}</td>
                                 <td>{{ cliente.validar_integridad }}</td>
                                 <td>
-                                    {% if cliente.validar_integridad %}
-                                        <button class="btn btn-success" style="background-color:blue" onmouseover="this.style.backgroundColor='red'" onmouseout="this.style.backgroundColor='blue'" >Integridad: Yes</button>
-                                    {% else %}
-                                        <button class="btn btn-success" style="background-color:black" onmouseover="this.style.backgroundColor='red'" onmouseout="this.style.backgroundColor='black'" onmouseleave="this.style.backgroundColor='green'">Integridad: Not</button>
-                                    {% endif %}
+                                    <div id="integridad_{{ cliente.id }}" class="integridad-indicador" 
+                                         {% if cliente.validar_integridad %}
+                                             style="background-color: blue"
+                                         {% else %}
+                                             style="background-color: black"
+                                         {% endif %}>
+                                    </div>
                                 </td>
                             
                                 <td>
