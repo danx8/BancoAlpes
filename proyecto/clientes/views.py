@@ -16,6 +16,7 @@ from proyecto.auth0backend import getRole
 def cliente_list(request):
     role = getRole(request)
     if role != "Administrador" and role != "Normal":
+        form = ClienteForm()
         context = {
             'form': form,
         }
