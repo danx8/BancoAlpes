@@ -16,7 +16,10 @@ from proyecto.auth0backend import getRole
 def cliente_list(request):
     role = getRole(request)
     if role != "Administrador" and role != "Normal":
-         return HttpResponse("No autorizado a listar clientes")
+        context = {
+            'form': form,
+        }
+        return render(request, 'Cliente/clienteFailed.html', context)
      
           
     clientes = get_cliente()

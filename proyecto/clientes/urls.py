@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns = [
     path('clientes/', views.cliente_list, name='clienteList'),
+    path('clienteFailed/', views.cliente_list, name='clienteFailed'),
     path('clientecreate/', csrf_exempt(views.cliente_create), name='clienteCreate'),
     path('clienteCreateFailed/', csrf_exempt(views.cliente_create), name='clienteCreateFailed'),
     path('clientecreate-jmeter/', csrf_exempt(views.cliente_create_jmeter), name='cliente_create_jmeter'),
