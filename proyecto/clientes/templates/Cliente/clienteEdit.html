@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<form method="POST"   action="/clienteEdit/">
+<form method="POST"   >
     {% csrf_token %}
     <br>
     {{ form.as_p }}
