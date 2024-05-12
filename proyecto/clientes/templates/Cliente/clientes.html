@@ -6,9 +6,6 @@
         <div class="page-header-title">
             <h4 class="page-title">Clientes</h4>
             <div style="text-align:right;">
-                <button type="button" class="btn btn-success waves-effect waves-light"
-                        onClick=" window.location.href='/clientecreate' " style="text-align:center;">+
-                </button>
                 <a href="/clientecreate" class="btn btn-success"><i class="fa-solid fa-plus"></i></a>
 
             </div>
@@ -65,9 +62,7 @@
                                     </a>
                                 </td>
                                 <td>
-
-                                    <a href="/clienteEdit/{{cliente.id}}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i> Editar</a>                                   
-
+                                    <a href="/clienteEdit/{{cliente.id}}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i> Editar</a>
                                 </td>
                             </tr>
                             {% endfor %}
