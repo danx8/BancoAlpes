@@ -11,6 +11,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from proyecto.auth0backend import getRole
+from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 
 @login_required
 def cliente_list(request):
@@ -56,6 +57,34 @@ def cliente_create(request):
         'form': form,
     }
     return render(request, 'Cliente/clienteCreate.html', context)
+
+@login_required
+def cliente_edit(request, cliente_id):
+    # Obtener el cliente que se desea editar
+    cliente = get_object_or_404(Cliente, pk=cliente_id)
+    role = getRole(request)
+    
+    # Verificar si el usuario tiene permisos de Administrador
+    if role != "Administrador":
+        return render(request, 'Cliente/clienteEditFailed.html')
+    
+    if request.method == 'POST':
+        # Rellenar el formulario con los datos del cliente existente
+        form = ClienteForm(request.POST, instance=cliente)
+        if form.is_valid():
+            # Guardar los cambios si el formulario es válido
+            form.save()
+            messages.success(request, 'Cliente updated successfully')
+            return HttpResponseRedirect(reverse('cliente_edit', args=[cliente_id]))
+    else:
+        # Si no es una solicitud POST, mostrar el formulario con los datos del cliente
+        form = ClienteForm(instance=cliente)
+    
+    context = {
+        'form': form,
+        'cliente': cliente,
+    }
+    return render(request, 'Cliente/clienteEdit.html', context)
 
 
 def cliente_create_jmeter(request):
