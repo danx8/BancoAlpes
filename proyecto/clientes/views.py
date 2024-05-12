@@ -77,6 +77,11 @@ def cliente_edit(request, cliente_id):
             # Guardar los cambios si el formulario es válido
             form.save()
             messages.success(request, 'Cliente updated successfully')
+            form = ClienteForm()
+            context = {
+                'form': form,
+            }
+            
             return render(request, 'Cliente/clienteEditSave.html', context)
     else:
         # Si no es una solicitud POST, mostrar el formulario con los datos del cliente
