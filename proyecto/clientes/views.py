@@ -52,7 +52,7 @@ def cliente_account(request):
             'form': form,
             'cliente': cliente,
         }
-        return render(request, 'Cliente/account.html', context)
+        return render(request, 'Cliente/clienteCreateTarjeta.html', context)
     except Http404:
         return render(request, 'Cliente/clienteEmailFailed.html')
 
