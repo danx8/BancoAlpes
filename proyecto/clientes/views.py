@@ -90,8 +90,12 @@ def cliente_create_tarjeta(request, password):
         return render(request, 'Cliente/clienteFailed.html', context)
     try:
         cliente = get_object_or_404(Cliente, correo=email)
-        
-        return render(request, 'Cliente/clienteFailed.html')
+        form = ClienteForm(instance=cliente)
+        context = {
+            'form': form,
+            'cliente': cliente,
+        }
+        return render(request, 'Cliente/clienteCreateTarjeta.html', context)
     except Http404:
         return render(request, 'Cliente/clienteEmailFailed.html')
 
