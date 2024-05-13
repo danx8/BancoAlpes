@@ -100,14 +100,16 @@ def cliente_edit(request, cliente_id):
 def cliente_borrar(request, cliente_id):
     cliente = get_object_or_404(Cliente, pk=cliente_id)
     role = getRole(request)
-    
     if role != "Administrador":
-        return render(request, 'Cliente/clienteDeleteFailed.html')
+        form = ClienteForm()
+        context = {
+            'form': form,
+        }
+        return render(request,  'Cliente/clienteDeleteFailed.html', context)
+    
     
     if request.method == 'GET':
-        # Verificar que se esté usando el método POST
         cliente.delete()
-        messages.success(request, 'Cliente deleted successfully')
         return redirect("clienteList")
 
     else:
