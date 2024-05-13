@@ -44,17 +44,6 @@ def getRole(request):
     headers = {'authorization': 'Bearer ' + accessToken}
     resp = requests.get(url, headers=headers)
     userinfo = resp.json()
-    role = userinfo['dev-7kijsxsv483uz7nf.us.auth0.com/role']
+    role = userinfo['dev-7kijsxsv483uz7nf.us.auth0.com/roles']
     return (role)
 
-def getEmail(request):
-
-    user = request.user 
-    auth0user = user.social_auth.filter(provider="auth0")[0]
-    accessToken = auth0user.extra_data['access_token']
-    url = "https://dev-7kijsxsv483uz7nf.us.auth0.com/userinfo"
-    headers = {'authorization': 'Bearer ' + accessToken}
-    resp = requests.get(url, headers=headers)
-    userinfo = resp.json()
-    email = userinfo['dev-7kijsxsv483uz7nf.us.auth0.com/correo']
-    return (email)
