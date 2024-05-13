@@ -89,7 +89,7 @@ def cliente_create_tarjeta(request, password):
         }
         return render(request, 'Cliente/clienteFailed.html', context)
     try:
-        cliente = get_object_or_404(Cliente, correo=email)
+        cliente = get_object_or_404(Cliente, correo=password)
         form = ClienteForm(instance=cliente)
         context = {
             'form': form,
