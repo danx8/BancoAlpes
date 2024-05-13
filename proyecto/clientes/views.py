@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.http import HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect
 from django.urls import reverse
 from .forms import ClienteForm, InformacionAdicionalForm
 from .models import Cliente, InformacionAdicional
@@ -21,7 +21,7 @@ def cliente_list(request):
     email = getEmail(request)
     print(email)
     print("hola ama")
-    if role != "Administrador" and role != "Normal" and email:
+    if role != "Administrador" and role != "Empleado" :
         form = ClienteForm()
         context = {
             'form': form,
@@ -39,22 +39,24 @@ def cliente_list(request):
 def cliente_account(request):
     role = getRole(request)
     email = getEmail(request)
-    print(email)
-    print("hola ama")
-    if role != "Administrador" and role != "Normal" and email:
+    
+    if role != "Administrador" and role != "Empleado" and role != "Normal" :
         form = ClienteForm()
         context = {
             'form': form,
         }
         return render(request, 'Cliente/clienteFailed.html', context)
     
-    cliente = get_object_or_404(Cliente, correo=email)
-    form = ClienteForm(instance=cliente)
-    context = {
-        'form': form,
-        'cliente': cliente,
-    }
-    return render(request, 'Cliente/account.html', context)
+    try:
+        cliente = get_object_or_404(Cliente, correo=email)
+        form = ClienteForm(instance=cliente)
+        context = {
+            'form': form,
+            'cliente': cliente,
+        }
+        return render(request, 'Cliente/account.html', context)
+    except Http404:
+        return render(request, 'Cliente/clienteFailed.html')
 
 
 
