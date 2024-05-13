@@ -56,8 +56,31 @@ def cliente_account(request):
         }
         return render(request, 'Cliente/account.html', context)
     except Http404:
-        return render(request, 'Cliente/clienteFailed.html')
+        return render(request, 'Cliente/clienteEmailFailed.html')
 
+
+@login_required
+def cliente_create_tarjeta(request):
+    role = getRole(request)
+    email = getEmail(request)
+    
+    if role != "Administrador" and role != "Empleado" and role != "Normal" :
+        form = ClienteForm()
+        context = {
+            'form': form,
+        }
+        return render(request, 'Cliente/clienteFailed.html', context)
+    
+    try:
+        cliente = get_object_or_404(Cliente, correo=email)
+        form = ClienteForm(instance=cliente)
+        context = {
+            'form': form,
+            'cliente': cliente,
+        }
+        return render(request, 'Cliente/clienteCreateTarjeta.html', context)
+    except Http404:
+        return render(request, 'Cliente/clienteEmailFailed.html')
 
 
 @login_required

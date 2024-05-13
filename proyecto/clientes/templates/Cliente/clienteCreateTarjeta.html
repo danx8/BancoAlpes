@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="alert alert-danger" role="alert">
+    {% if mensaje %}
+        {{ mensaje }}
+    {% endif %}
+</div>
+<form method="POST" action="{% url 'ruta_del_formulario' %}">
+    {% csrf_token %}
+    <input type="text" name="informacion" placeholder="Ingrese información aquí" required>
+    <button type="submit" class="btn btn-primary waves-effect waves-light">Enviar</button>
+</form>
+<button type="button" class="btn btn-secondary waves-effect waves-light" onclick="history.back()">
+    Volver
+</button>
+{% endblock %}
