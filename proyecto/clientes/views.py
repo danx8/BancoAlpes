@@ -110,7 +110,7 @@ def cliente_borrar(request, cliente_id):
         # Eliminar el cliente
         cliente.delete()
         messages.success(request, 'Cliente deleted successfully')
-        return redirect('cliente_list')  # Ajusta esto según tus rutas
+        return redirect('clientes')  
     
     context = {
         'cliente': cliente,
