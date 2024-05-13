@@ -111,11 +111,11 @@ def cliente_borrar(request, cliente_id):
         clientes = get_cliente()
         cliente_list(request) 
 
-    
-    context = {
-        'cliente': cliente,
-    }
-    return render(request, 'Cliente/clienteBorrar.html', context)
+    else:
+        context = {
+            'cliente': cliente,
+        }
+        return render(request, 'Cliente/clienteBorrar.html', context)
 
 
 
