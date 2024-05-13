@@ -21,7 +21,7 @@ def cliente_list(request):
     email = getEmail(request)
     print(email)
     print("hola ama")
-    if role != "Normal" and email == "thesupervisor@gmail.com":
+    if role != "Administrador" and role != "Normal" and email:
         form = ClienteForm()
         context = {
             'form': form,
@@ -34,6 +34,26 @@ def cliente_list(request):
             'cliente_list': clientes
     }
     return render(request, 'Cliente/clientes.html', context)
+
+@login_required
+def cliente_account(request):
+    role = getRole(request)
+    email = getEmail(request)
+    if role != "Administrador" and role != "Normal" and email:
+        form = ClienteForm()
+        context = {
+            'form': form,
+        }
+        return render(request, 'Cliente/clienteFailed.html', context)
+     
+      
+    clientes = get_cliente()
+    context = {
+            'cliente_list': clientes
+    }
+    return render(request, 'Cliente/clientes.html', context)
+
+
 
 
 @login_required
