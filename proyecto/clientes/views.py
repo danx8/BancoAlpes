@@ -108,7 +108,7 @@ def cliente_borrar(request, cliente_id):
         # Verificar que se esté usando el método POST
         cliente.delete()
         messages.success(request, 'Cliente deleted successfully')
-        return redirect(cliente_list)
+        return redirect("clienteList")
 
     else:
         context = {
