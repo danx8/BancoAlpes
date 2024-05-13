@@ -108,7 +108,7 @@ def cliente_borrar(request, cliente_id):
         return render(request, 'Cliente/clienteDeleteFailed.html')
     
  
-    if request.method == 'POST':
+    if request.method != 'POST':
         # Eliminar el cliente
         cliente.delete()
         messages.success(request, 'Cliente deleted successfully')
@@ -117,7 +117,7 @@ def cliente_borrar(request, cliente_id):
             'cliente_list': clientes
          }
         return render(request, 'Cliente/clientes.html', context) 
-        
+
     
     context = {
         'cliente': cliente,
