@@ -21,7 +21,7 @@ def cliente_list(request):
     email = getEmail(request)
     print(email)
     print("hola ama")
-    if role != "Administrador" and role != "Normal" and email == "thesupervisor@gmail.com":
+    if role != "Normal" and email == "thesupervisor@gmail.com":
         form = ClienteForm()
         context = {
             'form': form,
