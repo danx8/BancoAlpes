@@ -94,6 +94,31 @@ def cliente_edit(request, cliente_id):
     return render(request, 'Cliente/clienteEdit.html', context)
 
 
+@login_required
+def cliente_borrar(request, cliente_id):
+    cliente = get_object_or_404(Cliente, pk=cliente_id)
+    
+    
+    role = getRole(request)
+    
+
+    if role != "Administrador":
+        return render(request, 'Cliente/clienteDeleteFailed.html')
+    
+ 
+    if request.method == 'POST':
+        # Eliminar el cliente
+        cliente.delete()
+        messages.success(request, 'Cliente deleted successfully')
+        return redirect('cliente_list')  # Ajusta esto según tus rutas
+    
+    context = {
+        'cliente': cliente,
+    }
+    return render(request, 'Cliente/clienteDelete.html', context)
+
+
+
 def cliente_create_jmeter(request):
     
     if request.method == 'POST':
