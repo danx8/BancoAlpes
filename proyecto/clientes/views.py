@@ -97,8 +97,7 @@ def cliente_edit(request, cliente_id):
 
 
 @login_required
-def cliente_borrar(request, cliente_id):
-    cliente = get_object_or_404(Cliente, pk=cliente_id)  
+def cliente_borrar(request, cliente_id):  
     role = getRole(request)
     if role != "Administrador":
         form = ClienteForm()
@@ -107,10 +106,15 @@ def cliente_borrar(request, cliente_id):
         }
         return render(request,  'Cliente/clienteDeleteFailed.html', context)
     
+    cliente = get_object_or_404(Cliente, pk=cliente_id)
+    if request.method == 'GET':
+        cliente.delete()
+        return HttpResponseRedirect(reverse('clienteList'))
     
-    
-    cliente.delete()
-    return HttpResponseRedirect(reverse('clienteList'))
+    context = {
+        'cliente': cliente,
+    }
+    return render(request, 'Cliente/clienteBorrar.html', context)
 
     
 
