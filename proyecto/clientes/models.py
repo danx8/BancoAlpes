@@ -11,7 +11,7 @@ class Cliente(models.Model):
     ciudad = models.CharField(max_length=100, default='')
     fechaNacimiento = models.DateField()
     integridad_hash = models.CharField(max_length=64, editable=False)
-    
+    #data = json
     def calcular_hash(self):
         data = f"{self.nombre}{self.apellido}{self.cedula}{self.celular}{self.correo}{self.pais}{self.ciudad}{self.fechaNacimiento}".encode('utf-8')
         return hashlib.sha256(data).hexdigest()
