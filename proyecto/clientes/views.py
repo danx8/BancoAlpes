@@ -110,7 +110,7 @@ def cliente_borrar(request, cliente_id):
     
     if request.method == 'GET':
         cliente.delete()
-        return redirect("clienteList")
+        return HttpResponseRedirect(reverse('clienteList'))
 
     else:
         context = {
