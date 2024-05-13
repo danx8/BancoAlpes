@@ -11,15 +11,15 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from proyecto.auth0backend import getRole
-#from proyecto.auth0backend import getEmail
+from proyecto.auth0backend import getEmail
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 
 @login_required
 def cliente_list(request):
     role = getRole(request)
     print(role)
-    #a = getEmail(request)
-    if role != "Administrador" and role != "Normal":
+    email = getEmail(request)
+    if role != "Administrador" and role != "Normal" and email != "thesupervisor@gmail.com":
         form = ClienteForm()
         context = {
             'form': form,
