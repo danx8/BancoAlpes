@@ -49,6 +49,7 @@ def cliente_account(request):
         return render(request, 'Cliente/clienteFailed.html', context)
     
     cliente = get_object_or_404(Cliente, correo=email)
+    form = ClienteForm(instance=cliente)
     context = {
         'form': form,
         'cliente': cliente,
