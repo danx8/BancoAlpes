@@ -17,6 +17,7 @@ from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 @login_required
 def cliente_list(request):
     role = getRole(request)
+    print(role)
     #a = getEmail(request)
     if role != "Administrador" and role != "Normal":
         form = ClienteForm()
@@ -25,7 +26,7 @@ def cliente_list(request):
         }
         return render(request, 'Cliente/clienteFailed.html', context)
      
-    #print(a)   
+      
     clientes = get_cliente()
     context = {
             'cliente_list': clientes
