@@ -82,6 +82,8 @@ def cliente_edit(request, cliente_id):
                 'form': form,
             }
             
+            
+            
             return render(request, 'Cliente/clienteEditSave.html', context)
     else:
         # Si no es una solicitud POST, mostrar el formulario con los datos del cliente
@@ -110,11 +112,17 @@ def cliente_borrar(request, cliente_id):
         # Eliminar el cliente
         cliente.delete()
         messages.success(request, 'Cliente deleted successfully')
-        return redirect('clientes')  
+        clientes = get_cliente()
+        context = {
+            'cliente_list': clientes
+        }
+        return render(request, 'Cliente/clientes.html', context) 
     
     context = {
         'cliente': cliente,
     }
+    
+    
     return render(request, 'Cliente/clienteBorrar.html', context)
 
 
