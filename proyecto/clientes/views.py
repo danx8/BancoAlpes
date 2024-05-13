@@ -19,8 +19,6 @@ def cliente_list(request):
     role = getRole(request)
     print(role)
     email = getEmail(request)
-    print(email)
-    print("hola ama")
     if role != "Administrador" and role != "Empleado" :
         form = ClienteForm()
         context = {
@@ -63,7 +61,7 @@ def cliente_account(request):
 def cliente_create_tarjeta(request):
     role = getRole(request)
     email = getEmail(request)
-    
+    print("entro")
     if role != "Administrador" and role != "Empleado" and role != "Normal" :
         form = ClienteForm()
         context = {
