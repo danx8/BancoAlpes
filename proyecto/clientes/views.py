@@ -99,31 +99,22 @@ def cliente_edit(request, cliente_id):
 @login_required
 def cliente_borrar(request, cliente_id):
     cliente = get_object_or_404(Cliente, pk=cliente_id)
-    
-    
     role = getRole(request)
     
-
     if role != "Administrador":
         return render(request, 'Cliente/clienteDeleteFailed.html')
     
- 
-    if request.method != 'POST':
+    if request.method == 'GET':
         # Eliminar el cliente
         cliente.delete()
         messages.success(request, 'Cliente deleted successfully')
         clientes = get_cliente()
-        context = {
-            'cliente_list': clientes
-         }
-        return render(request, 'Cliente/clientes.html', context) 
+        cliente_list(request) 
 
     
     context = {
         'cliente': cliente,
     }
-    
-    
     return render(request, 'Cliente/clienteBorrar.html', context)
 
 
