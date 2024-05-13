@@ -115,8 +115,9 @@ def cliente_borrar(request, cliente_id):
         clientes = get_cliente()
         context = {
             'cliente_list': clientes
-        }
+         }
         return render(request, 'Cliente/clientes.html', context) 
+        
     
     context = {
         'cliente': cliente,
