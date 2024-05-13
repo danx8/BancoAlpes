@@ -39,20 +39,21 @@ def cliente_list(request):
 def cliente_account(request):
     role = getRole(request)
     email = getEmail(request)
+    print(email)
+    print("hola ama")
     if role != "Administrador" and role != "Normal" and email:
         form = ClienteForm()
         context = {
             'form': form,
         }
         return render(request, 'Cliente/clienteFailed.html', context)
-     
-      
-    clientes = get_cliente()
+    
+    cliente = get_object_or_404(Cliente, correo=email)
     context = {
-            'cliente_list': clientes
+        'form': form,
+        'cliente': cliente,
     }
-    return render(request, 'Cliente/clientes.html', context)
-
+    return render(request, 'Cliente/account.html', context)
 
 
 
