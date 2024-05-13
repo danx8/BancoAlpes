@@ -109,10 +109,7 @@ def cliente_borrar(request, cliente_id):
         cliente.delete()
         messages.success(request, 'Cliente deleted successfully')
         clientes = get_cliente()
-        context = {
-                'cliente_list': clientes
-        }
-        return render(request, 'Cliente/clientes.html', context)
+        cliente_list(request) 
 
     else:
         context = {
