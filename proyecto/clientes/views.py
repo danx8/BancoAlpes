@@ -107,7 +107,7 @@ def cliente_borrar(request, cliente_id):
         return render(request,  'Cliente/clienteDeleteFailed.html', context)
     
     cliente = get_object_or_404(Cliente, pk=cliente_id)
-    if request.method == 'GET':
+    if request.method == 'POST':
         cliente.delete()
         return HttpResponseRedirect(reverse('clienteList'))
     
