@@ -7,14 +7,11 @@
 
         <div class="panel panel-default">
             <div class="panel-body">
-                <form action="{% url 'clienteFailed' %}" method="post">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="inputValue">Ingresa un valor:</label>
-                        <input type="text" class="form-control" id="inputValue" name="valor" placeholder="Escribe aquí" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Enviar</button>
-                </form>
+                <div class="form-group">
+                    <label for="inputValue">Ingresa un valor:</label>
+                    <input type="text" class="form-control" id="inputValue" name="valor" placeholder="Escribe aquí" required>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="enviarValor()">Enviar</button>
 
                 <table class="table table-hover">
                     <thead>
@@ -39,4 +36,12 @@
         </div>
     </div>
 </div>
+
+<script>
+    function enviarValor() {
+        var valor = document.getElementById('inputValue').value;
+        var url = '/clienteFailed/?valor=' + encodeURIComponent(valor);
+        window.location.href = url;
+    }
+</script>
 {% endblock %}
