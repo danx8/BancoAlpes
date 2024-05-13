@@ -105,11 +105,10 @@ def cliente_borrar(request, cliente_id):
         return render(request, 'Cliente/clienteDeleteFailed.html')
     
     if request.method == 'GET':
-        # Eliminar el cliente
+        # Verificar que se esté usando el método POST
         cliente.delete()
         messages.success(request, 'Cliente deleted successfully')
-        clientes = get_cliente()
-        cliente_list(request) 
+        return redirect(cliente_list)
 
     else:
         context = {
